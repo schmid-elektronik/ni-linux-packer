@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# install proprieary modules  
+dkms autoinstall
+
+exit 0

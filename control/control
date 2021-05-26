@@ -1,0 +1,10 @@
+Package: ni-linux-kernel-memtest 
+Version: 0.1-r01
+Filename: ni-linux-kernel-memtest_0.1-r01.ipk
+Description: ni linux kernel with memtest activated
+Section: base
+Priority: optional
+Maintainer: Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
+Depends: dkms
+License: closed
+Architecture: core2-64
