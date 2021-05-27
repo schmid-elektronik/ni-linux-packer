@@ -1,10 +1,10 @@
-Package: ni-linux-kernel-memtest 
+Package: ni-linux-kernel-custom
 Version: 0.1-r01
-Filename: ni-linux-kernel-memtest_0.1-r01.ipk
-Description: ni linux kernel with memtest activated
+Filename: ni-linux-kernel-custom_0.1-r01.ipk
+Description: ni linux kernel, modules and headers
 Section: base
 Priority: optional
 Maintainer: Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
 Depends: dkms
-License: closed
+License: GPLv2
 Architecture: core2-64

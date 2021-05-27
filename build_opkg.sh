@@ -43,13 +43,19 @@ test $? -ne 0 && echo "### failed to get kernel modules" && exit 1
 # remove symbolic links
 rm -r $TARGET_FOLDER_MODULES/${KERNEL_RELEASE}/{build,source}
 
-## headers
-unsquashfs -d $TARGET_FOLDER_MODULES/${KERNEL_RELEASE}/build/ $SRC_FILE_HEADERS >> /dev/null
+## headers, the squashfs holds headers in the kernel subfolder, move it to modules/$version/build/
+unsquashfs -d ./tmp/ $SRC_FILE_HEADERS >> /dev/null
+mv ./tmp/kernel/ $TARGET_FOLDER_MODULES/${KERNEL_RELEASE}/build/
+rm -r ./tmp/
 test $? -ne 0 && echo "### failed to ni module versionig" && exit 1
 
 #--------------------------------------------#
 echo "### build opkg package, note you may want to use opkg utils, see link in script"
 # https://forums.ni.com/t5/NI-Linux-Real-Time-Documents/NI-Linux-Real-Time-and-opkg-Introduction-to-ipks/ta-p/4014793?profile.language=en
+
+## set kernel version in postinst script
+sed -i "s/^KERNEL_VERSION=.*/KERNEL_VERSION=${KERNEL_RELEASE}/g" ./control/postinst
+
 ## get config
 PKG_VERSION=$(cat ./control/control | grep Version: | sed -e "s/^Version://" | tr -d [:space:])
 PKG_NAME=$(cat ./control/control | grep Package: | sed -e "s/^Package://" | tr -d [:space:])
@@ -67,7 +73,6 @@ test $? -ne 0 && echo "### failed commpressing package" && exit 1
 
 gzip -c ./control/control > ./${PKG_NAME}_${PKG_VERSION}/Packages.gz
 test $? -ne 0 && echo "### failed commpressing package info" && exit 1
-
 
 #--------------------------------------------#
 echo "### cleanup"

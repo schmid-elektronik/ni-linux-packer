@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# backup old kernel  
+mv /boot/runmode/bzImage /boot/runmode/bzImage.$(uname -r)
+
+exit 0

@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # install proprieary modules  
-dkms autoinstall
+KERNEL_VERSION=
+/usr/lib/dkms/dkms_autoinstaller start ${KERNEL_VERSION}
+# dkms autoinstall works only for currently running kernel
 
 exit 0
