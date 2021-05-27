@@ -1,7 +1,7 @@
 # ni-linux-packer x86
 - create an opkg package from ni-linux branches 20.0 and newer kernel
-
-- generic, plain kernel, modules and header without any additional files
+- kernel, modules and header 
+- activates memtest in kernel bootarguments
 
 ## create package
 

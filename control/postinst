@@ -5,4 +5,7 @@ KERNEL_VERSION=
 /usr/lib/dkms/dkms_autoinstaller start ${KERNEL_VERSION}
 # dkms autoinstall works only for currently running kernel
 
+# set memtest bootargs
+echo "set otherbootargs=\"\${otherbootargs} memtest=1 \"" >> /boot/runmode/bootimage.cfg
+
 exit 0
