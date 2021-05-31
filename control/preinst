@@ -1,6 +1,6 @@
 #!/bin/bash
 
 # backup old kernel  
-mv /boot/runmode/bzImage /boot/runmode/bzImage.$(uname -r)
+mv /boot/linux_runmode.itb /boot/linux_runmode.itb.$(uname -r)
 
 exit 0

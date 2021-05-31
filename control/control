@@ -1,10 +1,10 @@
-Package: ni-linux-kernel-memtest
+Package: ni-linux-kernel-lwb5p
 Version: 0.1-r01
-Filename: ni-linux-kernel-memtest_0.1-r01.ipk
-Description: ni linux kernel, modules and headers, memtest activated
+Filename: ni-linux-kernel-lwb5p_0.1-r01.ipk
+Description: ni linux kernel, modules and headers, wifi driver lwb5p
 Section: base
 Priority: optional
 Maintainer: Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
-Depends: dkms
+Depends: dkms, dhcp-server, wpa-supplicant
 License: GPLv2
-Architecture: core2-64
+Architecture: cortexa9-vfpv3

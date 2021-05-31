@@ -1,11 +1,16 @@
 #!/bin/bash
 
-# install proprieary modules  
+# install proprieary modules, version i set by build_opkg.sh
 KERNEL_VERSION=
 /usr/lib/dkms/dkms_autoinstaller start ${KERNEL_VERSION}
 # dkms autoinstall works only for currently running kernel
 
-# set memtest bootargs
-echo "set otherbootargs=\"\${otherbootargs} memtest=1 \"" >> /boot/runmode/bootimage.cfg
+# enable interface in ni subsystem
+/usr/local/natinst/bin/nirtcfg --set section=wlan0,token=radioenabled,value=1
+/usr/local/natinst/bin/nirtcfg --set section=wlan0,token=dhcpenabled,value=1
+/usr/local/natinst/bin/nirtcfg --set section=wlan0,token=linklocalenabled,value=1
+/usr/local/natinst/bin/nirtcfg --set section=wlan0,token=adaptermode,value=1
+/usr/local/natinst/bin/nirtcfg --set section=wlan0,token=dhcpserverenabled,value=1
+/usr/local/natinst/bin/nirtcfg --set section=wlan0,token=Mode,value=TCPIP
 
 exit 0

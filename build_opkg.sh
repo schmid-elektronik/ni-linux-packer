@@ -20,14 +20,21 @@ fi
 
 #--------------------------------------------#
 # config src
+SRC_FOLDER_STAGE="./stage"
 KERNEL_RELEASE="$(cat ${KERNEL_ROOT}/include/config/kernel.release)"
-SRC_FILE_KERNEL="${KERNEL_ROOT}/ni-install/x86_64/boot/bzImage"
-SRC_FOLDER_MODULES="${KERNEL_ROOT}/ni-install/x86_64/lib/modules/${KERNEL_RELEASE}"
-SRC_FILE_HEADERS="${KERNEL_ROOT}/ni-install/x86_64/headers/module-versioning-image.squashfs"
+SRC_FILE_KERNEL="${KERNEL_ROOT}/ni-install/arm/boot/ni_zynq_custom_runmodekernel.itb"
+SRC_FOLDER_MODULES="${KERNEL_ROOT}/ni-install/arm/lib/modules/${KERNEL_RELEASE}"
+SRC_FILE_HEADERS="${KERNEL_ROOT}/ni-install/arm/headers/module-versioning-image.squashfs"
 
 # config target
-TARGET_FILE_KERNEL="./data/boot/runmode/bzImage"
+TARGET_FOLDER="./data"
+TARGET_FILE_KERNEL="./data/boot/linux_runmode.itb"
 TARGET_FOLDER_MODULES="./data/lib/modules/"
+
+#--------------------------------------------#
+echo "### copy staged kernel and firmware files"
+cp -r $SRC_FOLDER_STAGE $TARGET_FOLDER
+mv $TARGET_FOLDER_MODULES/KERNEL_VERSION $TARGET_FOLDER_MODULES/$KERNEL_RELEASE 
 
 #--------------------------------------------#
 echo "### get files from ni-install folders"
