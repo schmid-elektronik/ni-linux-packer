@@ -1,0 +1,13 @@
+Package: kernel-module-ath9k_htc-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32
+Version: 4.14+git40+27f65d4c99-r0.19
+Description: ath9k_htc kernel module
+ ath9k kernel module; Support for Atheros 802.11n wireless LAN cards.
+Section: kernel
+Priority: optional
+Maintainer: NI Linux Real-Time Maintainers <nilrt@ni.com>
+License: GPLv2
+Architecture: xilinx-zynq
+OE: linux-nilrt
+Depends: kernel-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32, kernel-module-ath-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32, kernel-module-ath9k-common-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32, kernel-module-ath9k-hw-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32, kernel-module-cfg80211-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32, kernel-module-mac80211-4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32, linux-firmware-ath9k
+Provides: kernel-module-ath9k_htc
+Source: linux-nilrt_git.bb

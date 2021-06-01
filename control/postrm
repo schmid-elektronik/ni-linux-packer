@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+if [ -z "$D" ]; then
+	depmod -a 4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32
+else
+	depmodwrapper -a -b $D 4.14.146-rt67-cg-8.5.0f0-xilinx-zynq-32
+fi
+
