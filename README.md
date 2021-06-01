@@ -39,5 +39,14 @@ make
     - see laird for details: https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases/download/LRD-REL-8.5.0.7/sig_LWB_series_radio.pdf
 
 ## Resources
+Laird Resources
+
 https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases
 https://www.lairdconnect.com/wireless-modules/wifi-modules-bluetooth/sterling-lwb5-plus-wifi-5-bluetooth-5-module
+
+
+
+Linux Backport
+
+https://backports.wiki.kernel.org/index.php/Documentation/packaging
+
