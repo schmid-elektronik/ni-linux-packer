@@ -1,4 +1,6 @@
 # ni-linux-packer arm
+- refers to this kernel [origin/nilrt/20.5/4.14/lwb5p](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt%2F20.5%2F4.14%2Flwb5p)
+
 - create an opkg package from ni-linux branches 20.0 and newer kernel
 - kernel, modules and header 
 
