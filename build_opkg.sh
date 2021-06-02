@@ -30,6 +30,7 @@ SRC_FILE_HEADERS="${KERNEL_ROOT}/ni-install/arm/headers/module-versioning-image.
 TARGET_FOLDER="./data"
 TARGET_FILE_KERNEL="./data/boot/linux_runmode.itb"
 TARGET_FOLDER_MODULES="./data/lib/modules/"
+TARGET_FILE_VERSIONING="./data/usr/local/natinst/tools/module-versioning-image.squashfs"
 
 #--------------------------------------------#
 echo "### copy staged kernel and firmware files"
@@ -50,10 +51,9 @@ test $? -ne 0 && echo "### failed to get kernel modules" && exit 1
 # remove symbolic links
 rm -r $TARGET_FOLDER_MODULES/${KERNEL_RELEASE}/{build,source}
 
-## headers, the squashfs holds headers in the kernel subfolder, move it to modules/$version/build/
-unsquashfs -d ./tmp/ $SRC_FILE_HEADERS >> /dev/null
-mv ./tmp/kernel/ $TARGET_FOLDER_MODULES/${KERNEL_RELEASE}/build/
-rm -r ./tmp/
+## ni versioning tools
+mkdir -p $(dirname $TARGET_FILE_VERSIONING)
+cp $SRC_FILE_HEADERS $TARGET_FILE_VERSIONING
 test $? -ne 0 && echo "### failed to ni module versionig" && exit 1
 
 #--------------------------------------------#

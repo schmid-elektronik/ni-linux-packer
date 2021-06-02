@@ -1,9 +1,14 @@
 #!/bin/bash
 
-# install proprieary modules, version i set by build_opkg.sh
-KERNEL_VERSION=
-/usr/lib/dkms/dkms_autoinstaller start ${KERNEL_VERSION}
-# dkms autoinstall works only for currently running kernel
+# install proprieary modules, version is set by build_opkg.sh
+KERNEL_VERSION=4.14.146-rt67-ni-g9cd7a29748a1
+
+# run the ni versioning tools
+source /usr/local/natinst/tools/versioning_utils.sh
+setup_versioning_env
+test $? -ne 0 && echo "### failed to setup setup_versioning_env tools" && exit 1
+versioning_call /usr/local/natinst/nikal/bin/updateNIDrivers $KERNEL_VERSION
+test $? -ne 0 && echo "### failed to run versioning tools" && exit 1
 
 # enable interface in ni subsystem
 /usr/local/natinst/bin/nirtcfg --set section=wlan0,token=radioenabled,value=1
