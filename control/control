@@ -1,6 +1,6 @@
 Package: ni-linux-kernel-memtest
-Version: 0.1-r01
-Filename: ni-linux-kernel-memtest_0.1-r01.ipk
+Version: 0.2-r01
+Filename: ni-linux-kernel-memtest_0.2-r01.ipk
 Description: ni linux kernel, modules and headers, memtest activated
 Section: base
 Priority: optional
