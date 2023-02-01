@@ -1,18 +1,8 @@
 # ni-linux-packer
 create an opkg package from ni-linux kernel
 
-## DOC
-Full  Doc here:
-
-- [NI RT Community Doc](https://forums.ni.com/t5/NI-Linux-Real-Time-Documents/Working-with-the-Linux-Kernel-on-NI-LabVIEW-RT-targets-Exercise/ta-p/3538644?profile.language=en)
-- [Getting Started Video](https://www.youtube.com/watch?v=pjRfKh8kf4o)
-- [NILRT rootfs ](https://github.com/ni/nilrt)
-
-When we started building a custom Kernel in 2019. The NILRT rootfs instructions lead into plain Linux running on a RIO without the NI tools.
-
 - This repo describes how to build the Kernel from [source](https://github.com/schmid-elektronik/ni-linux)
-- This repo builds an ipkg from the Kernel build
-- Today when starting from scratch, I would try to use NILRT rootfs instructions (Yocto) and build a complete Image
+- This repo builds an ipkg (opkg packet manager) from the Kernel build
 
 ### Releases/Branches
 
@@ -22,6 +12,18 @@ Every Branch in [this Repo](https://github.com/schmid-elektronik/ep-p22-zsom-lin
 - [Memtest x86](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.x/memtest/x86_64) - [20.5 memtest](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/memtest) - activates Memtest in Bootargs
 - [ath arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/ath/arm) - [20.5 ath](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/ath) - adds the ath9 wifi driver
 - [lwp5p arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/lwb5p/arm) - [20.5 lwp5p](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt%2F20.5%2F4.14%2Flwb5p) - adds the Laird Backport LWB5+  wifi driver
+
+*NOTE, for branches 19.x and older see [devnotes](./doc/devnotes.md) for installation*
+
+## DOC
+
+Full  Doc here:
+
+- [NI RT Community Doc](https://forums.ni.com/t5/NI-Linux-Real-Time-Documents/Working-with-the-Linux-Kernel-on-NI-LabVIEW-RT-targets-Exercise/ta-p/3538644?profile.language=en)
+- [Getting Started Video](https://www.youtube.com/watch?v=pjRfKh8kf4o)
+- [NILRT rootfs ](https://github.com/ni/nilrt)
+
+*NOTE, When we started building a custom Kernel in 2019. The NILRT rootfs instructions lead into plain Linux running on a RIO without the NI tools. Today when starting from scratch, I would try to use NILRT rootfs instructions (Yocto) and build a complete Image*
 
 
 
@@ -33,7 +35,7 @@ Every Branch in [this Repo](https://github.com/schmid-elektronik/ep-p22-zsom-lin
 # install required tools
 apt install texinfo u-boot-tools gawk chrpath wget git unzip make gcc g++ build-essential subversion sed autoconf automake texi2html coreutils diffstat python-pysqlite2 docbook-utils libsdl1.2-dev libxml-parser-perl libgl1-mesa-dev libglu1-mesa-dev xsltproc desktop-file-utils groff libtool xterm fop libncurses5-dev libncursesw5-dev
 
-# mksquashfs
+# mksquashfs for 19.x
 
 # get toolchain
 # armv7-a: http://www.ni.com/download/labview-real-time-module-2014/4957/en/
