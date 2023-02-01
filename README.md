@@ -8,33 +8,81 @@ Full  Doc here:
 - [Getting Started Video](https://www.youtube.com/watch?v=pjRfKh8kf4o)
 - [NILRT rootfs ](https://github.com/ni/nilrt)
 
-Be aware you would need to build and copy kernel and rootfs separately
+When we started building a custom Kernel in 2019. The NILRT rootfs instructions lead into plain Linux running on a RIO without the NI tools.
 
-Be aware the [rootfs](https://github.com/ni/nilrt) instruction will lead you in a plain linux, but misses the proprietary NI stuff
+- This repo describes how to build the Kernel from [source](https://github.com/schmid-elektronik/ni-linux)
+- This repo builds an ipkg from the Kernel build
+- Today when starting from scratch, I would try to use NILRT rootfs instructions (Yocto) and build a complete Image
+
+### Releases/Branches
+
+Every Branch in [this Repo](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer) matches a Branch in the [Linux source Repo](https://github.com/schmid-elektronik/ni-linux)
+
+- [Generic x86](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.x/generic/x86_64) - [20.0 and newer](https://github.com/schmid-elektronik/ni-linux/tree/nilrt/20.0/4.14) - vanilla NI Kernel
+- [Memtest x86](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.x/memtest/x86_64) - [20.5 memtest](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/memtest) - activates Memtest in Bootargs
+- [ath arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/ath/arm) - [20.5 ath](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/ath) - adds the ath9 wifi driver
+- [lwp5p arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/lwb5p/arm) - [20.5 lwp5p](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt%2F20.5%2F4.14%2Flwb5p) - adds the Laird Backport LWB5+  wifi driver
 
 
-## Kernel Build
+
+## Vanilla Kernel Build
+
+### Tools
 
 ```bash
 # install required tools
-apt install texinfo u-boot-tools gawk chrpath libsdl-dev wget git-core unzip make gcc g++ build-essential subversion sed autoconf automake texi2html coreutils diffstat python-pysqlite2 docbook-utils libsdl1.2-dev libxml-parser-perl libgl1-mesa-dev libglu1-mesa-dev xsltproc desktop-file-utils groff libtool xterm fop libncurses5-dev libncursesw5-dev mksquashfs 
+apt install texinfo u-boot-tools gawk chrpath wget git unzip make gcc g++ build-essential subversion sed autoconf automake texi2html coreutils diffstat python-pysqlite2 docbook-utils libsdl1.2-dev libxml-parser-perl libgl1-mesa-dev libglu1-mesa-dev xsltproc desktop-file-utils groff libtool xterm fop libncurses5-dev libncursesw5-dev
+
+# mksquashfs
 
 # get toolchain
 # armv7-a: http://www.ni.com/download/labview-real-time-module-2014/4957/en/
-# x86_64: http://www.ni.com/download/labview-real-time-module-2014/4959/en/
+wget https://download.ni.com/support/softlib/labview/labview_rt/2018/Linux%20Toolchains/linux/oecore-x86_64-cortexa9-vfpv3-toolchain-6.0.sh
 
-# ARM, set environment 
+# x86_64: http://www.ni.com/download/labview-real-time-module-2014/4959/en/
+wget https://download.ni.com/support/softlib/labview/labview_rt/2018/Linux%20Toolchains/linux/oecore-x86_64-core2-64-toolchain-6.0.sh
+
+# install toolchain to default path /usr/local/
+```
+
+### Get Source
+
+```bash
+git clone https://github.com/schmid-elektronik/ni-linux.git
+git clone https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer.git
+```
+
+### Build Arm
+
+Check your architecture on the [cRio Site](https://www.ni.com/en-us/shop/hardware/products/compactrio-controller.html) or the [sbRio Site](https://www.ni.com/en-us/shop/hardware/products/compactrio-single-board-controller.html)
+
+```bash
+# ARM, set environment (zynq devices)
 export ARCH=arm
 export CROSS_COMPILE=/usr/local/oecore-x86_64/sysroots/x86_64-nilrtsdk-linux/usr/bin/arm-nilrt-linux-gnueabi/arm-nilrt-linux-gnueabi-
 export TGT_EXTRACFLAGS="--sysroot=/usr/local/oecore-x86_64/sysroots/cortexa9-vfpv3-nilrt-linux-gnueabi/"
 
-# x86, set environment 
+# cd into source
+cd ni-linux
+git co <YOURBRANCH>
+
+# ARM, make config
+make nati_zynq_defconfig
+
+# make ni-packages
+make -j4 ni-pkg
+```
+### Build x86_64
+
+```bash
+# x86, set environment (intel devices)
 export ARCH=x86_64
 export CROSS_COMPILE=/usr/local/oecore-x86_64_core2/sysroots/x86_64-nilrtsdk-linux/usr/bin/x86_64-nilrt-linux/x86_64-nilrt-linux-
 export TGT_EXTRACFLAGS="--sysroot=/usr/local/oecore-x86_64_core2/sysroots/core2-64-nilrt-linux/"
 
-# ARM, make config
-make nati_zynq_defconfig
+# cd into source
+cd ni-linux
+git co <YOURBRANCH>
 
 # X86, make config
 make nati_x86_64_defconfig
@@ -43,52 +91,7 @@ make nati_x86_64_defconfig
 make -j4 ni-pkg
 ```
 
-## copy Kernel
 
-```bash
-# ARM only
-scp ${KERNEL_ROOT}/ni-install/arm/boot/ni_zynq_custom_runmodekernel.itb \
-    admin@${rt_target_hostname}:/boot/linux_runmode.itb
 
-# x86_64 only
-scp ${KERNEL_ROOT}/ni-install/x86/boot/bzImage \
-    admin@${rt_target_hostname}:/boot/runmode/
-
-# Copy kernel modules
-scp -r ${KERNEL_ROOT}/ni-install/${ARCH}/lib/modules/ \
-       admin@${rt_target_hostname}:/lib/modules/${VERSION}/
-# Note that the newly-built modules directory contains symbolic links to the
-# build and source directories; do not copy the linked directories to your
-# target.
-```
-
-### Branches 19.1 and older
-
-```bash 
-# Copy headers squashfs
-scp ${KERNEL_ROOT}/ni-install/${ARCH}/headers/headers.squashfs \
-    admin@${rt_target_hostname}:/usr/local/natinst/tools/module-versioning-image.squashfs
-    
-# Reboot the target and check that the target successfully boots. 
-# check that your kernel is running 
-uname -a
-
-# update NI drivers to work with the new kernel.
-source /usr/local/natinst/tools/versioning_utils.sh
-setup_versioning_env
-versioning_call /usr/local/natinst/nikal/bin/updateNIDrivers $(kernel_version)
-```
-
-### Branches 20.0 and newer
-
-```bash
-# copy headers from host
-cd /{KernelRoot}/ni-install/x86_64/headers/
-unsquashfs module-versioning-image.squashfs
-scp -r squashfs-root/kernel/ admin@${TargetIP}:/lib/modules/${KernelVersion}
-
-# on target install proprietary modules
-dkms autoinstall
-dkms status
-```
+From here on follow the instructions in your respective Branch.  Or see [devnotes](./doc/devnotes.md) for manual installations.
 
