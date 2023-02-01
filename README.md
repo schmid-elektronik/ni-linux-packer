@@ -42,7 +42,8 @@ wget https://download.ni.com/support/softlib/labview/labview_rt/2018/Linux%20Too
 # x86_64: http://www.ni.com/download/labview-real-time-module-2014/4959/en/
 wget https://download.ni.com/support/softlib/labview/labview_rt/2018/Linux%20Toolchains/linux/oecore-x86_64-core2-64-toolchain-6.0.sh
 
-# install toolchain to default path /usr/local/
+# install ARM toolchain to    /usr/local/oecore-x86_64
+# install x86_64 toolchain to /usr/local/oecore-x86_64_core2
 ```
 
 ### Get Source
@@ -58,6 +59,7 @@ Check your architecture on the [cRio Site](https://www.ni.com/en-us/shop/hardwar
 
 ```bash
 # ARM, set environment (zynq devices)
+# . /usr/local/oecore-x86_64/environment-setup-cortexa9-vfpv3-nilrt-linux-gnueabi
 export ARCH=arm
 export CROSS_COMPILE=/usr/local/oecore-x86_64/sysroots/x86_64-nilrtsdk-linux/usr/bin/arm-nilrt-linux-gnueabi/arm-nilrt-linux-gnueabi-
 export TGT_EXTRACFLAGS="--sysroot=/usr/local/oecore-x86_64/sysroots/cortexa9-vfpv3-nilrt-linux-gnueabi/"
@@ -76,6 +78,7 @@ make -j4 ni-pkg
 
 ```bash
 # x86, set environment (intel devices)
+# . /usr/local/oecore-x86_64_core2/environment-setup-core2-64-nilrt-linux
 export ARCH=x86_64
 export CROSS_COMPILE=/usr/local/oecore-x86_64_core2/sysroots/x86_64-nilrtsdk-linux/usr/bin/x86_64-nilrt-linux/x86_64-nilrt-linux-
 export TGT_EXTRACFLAGS="--sysroot=/usr/local/oecore-x86_64_core2/sysroots/core2-64-nilrt-linux/"
@@ -89,6 +92,11 @@ make nati_x86_64_defconfig
 
 # make ni-packages
 make -j4 ni-pkg
+
+# FIXME, you might get the Error
+# You are building kernel with non-retpoline compiler, please update your compiler..
+# unconfig the CONFIG_RETPOLINE option
+# make menuconfig -> Processor type and features -> uncheck avoid speculative indirect branches in kernel
 ```
 
 
