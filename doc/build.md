@@ -1,22 +1,13 @@
-# ni-linux-packer arm
-- refers to this kernel [origin/nilrt/20.5/4.14/lwb5p](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt%2F20.5%2F4.14%2Flwb5p)
 
-- create an opkg package from ni-linux branches 20.0 and newer kernel
-- kernel, modules and header 
+# LWP5+ Backport
+Building the Backport generates the LWP5+ Kernel Modules. They are already in the stage folder. Here is how to build them from scratch.
 
-## create package
-
-- compile kernel as described in main branch
-- modify control/control to your need
-- run `./build_opkg.sh ${KERNEL_PATH} `
-- copy package to target 
-- install `opkg install ./package.ipkg`
-
-
-
-## backport
 - get backport https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases
-- build kernel, without the modules provided by backport, refer to `nilrt/20.5/4.14/lwb5p`
+- build kernel, without the modules provided by backport, refer to `nilrt/20.5/4.14/lwb5p` (that is configured in the lwb5p branch)
+
+## build
+
+Use the NI Crosscomplier
 
 ```bash
 set -a
@@ -28,15 +19,15 @@ set +a
 make defconfig-lwb5p
 make
 
-# copy built modules to target/package
+# copy built modules to target/package, respective the stage folder
 ```
 
 
 
-## Wifi setings
+## Wifi settings
 - AP Mode is done in wpa_supplicant.conf
-    - How to add support for MAX? interface appears as wiredapter
-- confi set with nirtcfg, see postinst
+    - Currently there is no support for MAX, since we use another driver.
+- config set with nirtcfg, see postinst for details
 - regulatory domain, set in /etc/modprobe.d/brmcfmac.conf
     - see laird for details: https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases/download/LRD-REL-8.5.0.7/sig_LWB_series_radio.pdf
 
