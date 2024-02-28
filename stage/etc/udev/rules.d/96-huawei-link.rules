@@ -1,0 +1,21 @@
+# This file creates a defined link to the Huawei Module
+
+# How to find device Attributes
+# udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB3)
+
+# How to write udev rules
+# http://reactivated.net/writing_udev_rules.html#example-printer
+# udevtest is replaced by udevadm info
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{interface}=="HUAWEI Mobile Connect - GPS Interface", SYMLINK+="Gps"
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{interface}=="HUAWEI Mobile Connect - PC UI Interface", SYMLINK+="Mobile"
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{product}=="u-blox GNSS receiver", SYMLINK+="RtkGps"
+
+# The Huawei Module Interfaces
+#udevadm info -a /dev/ttyUSB1 --> ATTRS{interface}=="HUAWEI Mobile Connect - Modem"
+#udevadm info -a /dev/ttyUSB2 --> ATTRS{interface}=="HUAWEI Mobile Connect - Application Interface"
+#udevadm info -a /dev/ttyUSB3 --> ATTRS{interface}=="HUAWEI Mobile Connect - PC UI Interface"
+#udevadm info -a /dev/ttyUSB4 --> ATTRS{interface}=="HUAWEI Mobile Connect - GPS Interface"
+
