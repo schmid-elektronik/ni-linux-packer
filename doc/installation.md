@@ -3,7 +3,7 @@
 - Installed `Linux RT System Image 20.5` for LabVIEW 2019 and 2020 (do not use the legacy Image installation)
 - Target has Internet access
 
-# installation
+# Installation
 
 ```bash
 # ssh in to your target (e.g. putty, bash)
@@ -52,8 +52,11 @@ network={
 
 # reboot to update config
 reboot
-
 ```
+
+## Device powering
+In order to be able to use the devices, ensure that they are powered correctly.
+See Labview tool: [zsom-mini-connect](https://github.com/schmid-elektronik/ep-p19-zsom-mini-connect-labview/tree/main)
 
 
 
