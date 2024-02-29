@@ -1,7 +1,7 @@
 # Prerequisite
 
--[x] installed `Linux RT System Image 20.5` for LabVIEW 2019 and 2020 (do not use the legacy Image installation)
--[x] Target has Internet access
+- Installed `Linux RT System Image 20.5` for LabVIEW 2019 and 2020 (do not use the legacy Image installation)
+- Target has Internet access
 
 # installation
 
