@@ -12,6 +12,7 @@ Every Branch in [this Repo](https://github.com/schmid-elektronik/ep-p22-zsom-lin
 - [Memtest x86](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.x/memtest/x86_64) - [20.5 memtest](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/memtest) - activates Memtest in Bootargs
 - [ath arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/ath/arm) - [20.5 ath](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/ath) - adds the ath9 wifi driver
 - [lwp5p arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/lwb5p/arm) - [20.5 lwp5p](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt%2F20.5%2F4.14%2Flwb5p) - adds the Laird Backport LWB5+  wifi driver
+- [zsom connect arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.5/zsom-connect/arm) - [20.5 zsom-connect](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/zsom-connect) - adds the Laird Backport LWB5+ wifi driver and activates USB serial mode for Huawei ME909
 
 *NOTE, for branches 19.x and older see [devnotes](./doc/devnotes.md) for installation*
 
