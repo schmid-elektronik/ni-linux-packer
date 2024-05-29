@@ -11,7 +11,7 @@ https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/blob/20.5/lwb5p/ar
   - see laird for details: https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases/download/LRD-REL-8.5.0.7/sig_LWB_series_radio.pdf
 
 # Huawei ME909
-To activated USB serial driver make defconfig and rebuild kernel modules. See Kernel build in main branch.  
+To activated USB serial driver make defconfig and rebuild kernel modules. See kernel build in main branch.  
 **Note: In our branch they are already activated!**
 
 ## build
@@ -20,6 +20,15 @@ To Build Kernel Modules, do some other custom config follow the steps below, jus
 
 ```bash
 sudo apt install libncurses5-dev libncursesw5-dev
+
+# ARM, set environment (zynq devices)
+# see also setup and kernel build in main branch
+export ARCH=arm
+export CROSS_COMPILE=/usr/local/oecore-x86_64/sysroots/x86_64-nilrtsdk-linux/usr/bin/arm-nilrt-linux-gnueabi/arm-nilrt-linux-gnueabi-
+export TGT_EXTRACFLAGS="--sysroot=/usr/local/oecore-x86_64/sysroots/cortexa9-vfpv3-nilrt-linux-gnueabi/"
+
+# cd into source
+cd ni-linux
 
 make nati_zynq_defconfig
 make menuconfig
