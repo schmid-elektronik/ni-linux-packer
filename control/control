@@ -1,0 +1,10 @@
+Package: nilrt-kernel-lwb5p_4.14-22.8
+Version: 0.1-r01
+Filename: nilrt-kernel-lwb5p_4.14-22.8_0.1-r01.ipk
+Description: ni linux kernel, modules and headers, wifi driver lwb5p
+Section: base
+Priority: optional
+Maintainer: Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
+Depends: dkms, dhcp-server, wpa-supplicant
+License: GPLv2
+Architecture: cortexa9-vfpv3
