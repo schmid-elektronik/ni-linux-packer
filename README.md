@@ -6,7 +6,7 @@ create an opkg package from ni-linux kernel
 
 ### Releases/Branches
 
-Every Branch in [this Repo](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer) matches a Branch in the [Linux source Repo](https://github.com/schmid-elektronik/ni-linux)
+Every Branch in [this Repo](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer) (except [22.8 lwp5p arm](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/22.8/lwb5p/arm)) matches a Branch in the [Linux source Repo](https://github.com/schmid-elektronik/ni-linux)
 
 - [Generic x86](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.x/generic/x86_64) - [20.0 and newer](https://github.com/schmid-elektronik/ni-linux/tree/nilrt/20.0/4.14) - vanilla NI Kernel
 - [Memtest x86](https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/tree/20.x/memtest/x86_64) - [20.5 memtest](https://github.com/schmid-elektronik/ni-linux/tree/origin/nilrt/20.5/4.14/memtest) - activates Memtest in Bootargs
