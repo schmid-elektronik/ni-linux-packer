@@ -1,7 +1,6 @@
 # Prerequisite
 
 - installed `Linux RT System Image 2022 Q4` for LabVIEW 2019 and higher (do not use the legacy Image installation)
-- Target has Internet access
 
 # Installation
 ### Target has internet access
