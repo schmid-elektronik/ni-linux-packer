@@ -3,7 +3,7 @@
 - installed `Linux RT System Image 2022 Q4` for LabVIEW 2019 and higher (do not use the legacy Image installation)
 
 # Installation
-### Target has internet access
+### Option A: Target has internet access
 ```bash
 # ssh in to your target (e.g. putty, bash)
 ssh admin@<IP>
@@ -15,10 +15,13 @@ wget https://github.com/schmid-elektronik/ep-p22-zsom-linux-packer/releases/down
 opkg install ./nilrt-kernel-lwb5p_4.14-22.8_0.1-r01.ipk
 # takes some minutes (proprietary ni modules are rebuilt)
 
+# remove unused package
+rm nilrt-kernel-lwb5p_4.14-22.8_0.1-r01.ipk
+
 # restart in the installed kernel
 reboot
 ```
-### Target has no internet access
+### Option B: Target has no internet access
 ```bash
 # download all ipk packages from the repos to our computer:
 #   dhcp-server-config_4.3.6-r0.49_cortexa9-vfpv3.ipk
@@ -37,46 +40,23 @@ opkg install ./dhcp-server_4.3.6-r0.49_cortexa9-vfpv3.ipk
 opkg install ./nilrt-kernel-lwb5p_4.14-22.8_0.1-r01.ipk
 # takes some minutes (proprietary ni modules are rebuilt)
 
+# remove unused packages
+rm *.ipk
+
 # restart in the installed kernel
 reboot
 ```
 
-
-
-## Config AccessPoint
-
-MAX can't handle this driver Backport. The AP is configured in the wpa_supplicant.conf file. (Basically the same that MAX does)
-
+### Check kernel
+After installing the lwb5p kernel package, the version and timestamp should be as follows:
 ```bash
-# ssh in to your target
-ssh admin@<IP>
-
-# install text editor (e.g. vi, nano)
-opkg install nano
-
-# open config file
-nano /etc/natinst/share/wpa_supplicant.conf
-
-# change parameter ssid, psk to your needs
-# psk need at least 8 characters
-# example config
-network={
-        ssid="myNetwork"
-        scan_ssid=1
-        psk="myKeySecure"
-        key_mgmt=WPA-PSK
-        mode=2
-        frequency=2412
-}
-
-# save and close file
-# with nano (ctl+x), (y), (Enter)
-
-# reboot to update config
-reboot
+uname -a
+Linux NI-sbRIO-9651-01c79dc3 4.14.146-rt67-ni-gbc0d982eacfb #2 SMP PREEMPT RT Mon Jun 10 12:39:32 CEST 2024 armv7l GNU/Linux
 ```
 
 
+## Config wifi module
+By default, the driver configures an access point with the name `sbRio` To adjust the settings or connect to an existing access point, please read here: [Wifi config](./configuration.md)
 
 
 
